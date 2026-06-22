@@ -2,6 +2,8 @@
 
 **Si Cuka** adalah aplikasi monolitik berbasis web untuk mempermudah karyawan dalam mengajukan, melacak, dan menyetujui permohonan cuti (Leave Request Management System). Aplikasi ini dirancang menggunakan standar performa modern, keamanan berlapis, dan tampilan antarmuka yang cerah, bersih, dan responsif.
 
+**Sample user dapat dilihat pada :** https://github.com/vinagustn/vibecode-sicuka/blob/master/sample_user.md
+
 ---
 
 ## 🚀 Tumpukan Teknologi (Tech Stack)
