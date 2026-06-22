@@ -1,0 +1,36 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Employee {
+  id         String   @id @default(uuid())
+  name       String
+  department String
+  position   String
+  role       String
+  username   String   @unique
+  password   String   @default("password123")
+  leaveBalance Int      @default(12)
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  leaveRequests LeaveRequest[]
+}
+
+model LeaveRequest {
+  id         String   @id @default(uuid())
+  employeeId String
+  startDate  DateTime
+  endDate    DateTime
+  reason     String
+  status     String   @default("PENDING") // PENDING, APPROVED, REJECTED
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  employee   Employee @relation(fields: [employeeId], references: [id], onDelete: Cascade)
+}
