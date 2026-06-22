@@ -150,8 +150,15 @@ function renderMarkdown(md: string) {
 export default async function CodeReviewPage() {
   let reportContent = ""
   try {
-    const filePath = path.join(process.cwd(), "..", "code_review_report.md")
-    reportContent = await fs.readFile(filePath, "utf-8")
+    // Coba baca dari folder root saat ini (jika dideploy langsung dari root)
+    let filePath = path.join(process.cwd(), "code_review_report.md")
+    try {
+      reportContent = await fs.readFile(filePath, "utf-8")
+    } catch {
+      // Fallback: Coba baca dari folder induk (jika berada di dalam subfolder sicuka)
+      filePath = path.join(process.cwd(), "..", "code_review_report.md")
+      reportContent = await fs.readFile(filePath, "utf-8")
+    }
   } catch (error) {
     reportContent = "# Laporan tidak ditemukan\n\nSilakan jalankan audit terlebih dahulu."
   }
